@@ -4,13 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mobile_project"
-    compileSdk = 34
+    namespace = "com.example.baythngai"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.mobile_project"
-        minSdk = 34
-        targetSdk = 34
+        applicationId = "com.example.baythngai"
+        minSdk = 31
         versionCode = 1
         versionName = "1.0"
 
@@ -50,15 +49,44 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit.v290)
+    implementation (libs.converter.gson)
+    implementation (libs.kotlinx.coroutines.android)
 
+    // Core dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    // Jetpack Compose and Material UI
+    implementation(libs.material.v190)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Lifecycle components for MVVM
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    // Retrofit for API calls
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Coroutine support
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Image loading with Glide
+    implementation(libs.glide)
+    // kapt("com.github.bumptech.glide:compiler:4.15.1")
+
+    // RecyclerView
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.coordinatorlayout)
+    implementation(libs.material)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

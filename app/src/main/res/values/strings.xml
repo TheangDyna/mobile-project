@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">mobile-project</string>
+    <string name="app_name">Baythngai</string>
+    <string name="product_image_desc">Product image</string>
+    <string name="add_to_cart">Add to Cart</string>
 </resources>
