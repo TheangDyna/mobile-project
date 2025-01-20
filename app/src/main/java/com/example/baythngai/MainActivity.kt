@@ -1,8 +1,8 @@
 package com.example.baythngai
 
+
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     private val productViewModel: ProductViewModel by viewModels()
     private lateinit var adapter: ProductAdapter
+    private var searchQuery: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,18 +21,36 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.topAppBar))
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
 
+        adapter = ProductAdapter(mutableListOf()) { product ->
+            println("Added to cart: ${product.name}")
+        }
+        recyclerView.adapter = adapter
+
+        // Observe products and update RecyclerView
         productViewModel.products.observe(this) { products ->
-            println("Updating RecyclerView with ${products.size} items") // Debug Log
-            adapter = ProductAdapter(products) { product ->
-                println("Added to cart: ${product.name}")
-            }
-            recyclerView.adapter = adapter
+            adapter.updateList(products)
         }
 
-        // Fetch all products initially
+        // Fetch first page
         productViewModel.fetchProducts()
+
+        // Detect scrolling to load more items
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
+                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount - 2) {
+                    productViewModel.fetchProducts(searchQuery)
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -40,19 +59,15 @@ class MainActivity : AppCompatActivity() {
         val searchItem = menu?.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
 
-        println("SearchView initialized") // Debug Log
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                println("Query submitted: $query") // Debug Log
-                productViewModel.fetchProducts(query) // Send query to API
+                searchQuery = query
+                productViewModel.fetchProducts(query, reset = true) // Reset search
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                println("Query changed: $newText") // Debug Log
-                productViewModel.fetchProducts(newText) // Live search update
-                return true
+                return false // Ignore live search for now
             }
         })
 
