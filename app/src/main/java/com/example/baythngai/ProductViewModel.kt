@@ -12,12 +12,12 @@ class ProductViewModel : ViewModel() {
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> get() = _products
 
-    fun fetchProducts() {
+    fun fetchProducts(searchQuery: String? = null) {
         viewModelScope.launch {
             try {
-                val products = repository.getProducts()
-                _products.value = products
-                println("Fetched products: $products") // Debug log
+                println("Fetching products with query: $searchQuery") // Debug log
+                val fetchedProducts = repository.getProducts(searchQuery)
+                _products.value = fetchedProducts
             } catch (e: Exception) {
                 e.printStackTrace()
                 println("Error fetching products: ${e.message}")

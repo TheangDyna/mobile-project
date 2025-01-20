@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ProductAdapter(private val products: List<Product>, private val onAddToCart: (Product) -> Unit) :
+class ProductAdapter(private var products: List<Product>, private val onAddToCart: (Product) -> Unit) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,4 +40,10 @@ class ProductAdapter(private val products: List<Product>, private val onAddToCar
     }
 
     override fun getItemCount(): Int = products.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<Product>) {
+        products = newList
+        notifyDataSetChanged()
+    }
 }
