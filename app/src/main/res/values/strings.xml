@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">Baythngai</string>
+    <string name="app_name">Baythngai Menu</string>
     <string name="product_image_desc">Product image</string>
-    <string name="add_to_cart">Add to Cart</string>
+    <string name="add_to_cart">View Detail</string>
     <string name="search">Search</string>
     <string name="product_name">Product Name</string>
     <string name="price_0_00">Price: $0.00</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
+    <string name="close">close</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="cuisines">Cuisines</string>
+    <string name="description">Description</string>
 </resources>

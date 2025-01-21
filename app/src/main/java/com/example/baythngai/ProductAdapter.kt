@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -20,7 +21,7 @@ class ProductAdapter(private var products: List<Product>, private val onAddToCar
         val productImage: ImageView = view.findViewById(R.id.productImage)
         val productName: TextView = view.findViewById(R.id.productName)
         val productPrice: TextView = view.findViewById(R.id.productPrice)
-        val addToCartButton: Button = view.findViewById(R.id.addToCartButton)
+        val viewDetailsButton: Button = view.findViewById(R.id.viewDetailsButton)
     }
 
     class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -50,8 +51,12 @@ class ProductAdapter(private var products: List<Product>, private val onAddToCar
                 .load(product.thumbnail)
                 .into(holder.productImage)
 
-            holder.addToCartButton.setOnClickListener {
-                onAddToCart(product)
+            holder.viewDetailsButton.setOnClickListener {
+                val context = holder.itemView.context
+                if (context is FragmentActivity) {
+                    val bottomSheet = ProductBottomSheet(product)
+                    bottomSheet.show(context.supportFragmentManager, "ProductBottomSheet")
+                }
             }
         }
     }

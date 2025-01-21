@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        adapter = ProductAdapter(mutableListOf()) { product ->
-            println("Added to cart: ${product.name}")
-        }
+        adapter = ProductAdapter(mutableListOf()) {}
         recyclerView.adapter = adapter
 
         // Observe products and update RecyclerView

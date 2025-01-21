@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bottom_sheet_handle" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="top">
+
+            <!-- Product Image -->
+            <ImageView
+                android:id="@+id/bottomSheetProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/product_image_desc"
+                android:background="@android:color/darker_gray" />
+
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/bottomSheetProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingTop="8dp" />
+
+            <!-- Product Price -->
+            <TextView
+                android:id="@+id/bottomSheetProductPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingTop="8dp" />
+
+            <!-- Availability -->
+            <TextView
+                android:id="@+id/bottomSheetProductStock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:paddingTop="4dp" />
+
+            <!-- Cuisines Section -->
+            <TextView
+                android:id="@+id/bottomSheetCuisinesLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cuisines"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingTop="12dp" />
+
+            <TextView
+                android:id="@+id/bottomSheetProductCuisines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:paddingTop="4dp" />
+
+            <!-- Product Description Section-->
+            <TextView
+                android:id="@+id/bottomSheetDescriptionLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingTop="12dp" />
+
+            <TextView
+                android:id="@+id/bottomSheetProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:paddingTop="4dp" />
+
+            <!-- Ingredients Section -->
+            <TextView
+                android:id="@+id/bottomSheetIngredientsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingTop="12dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/bottomSheetProductIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:paddingTop="4dp"
+                android:visibility="gone" />
+
+            <!-- Close Button -->
+            <Button
+                android:id="@+id/closeBottomSheetButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/close"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
