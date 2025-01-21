@@ -1,4 +1,4 @@
-package com.example.baythngai
+package com.example.baythngai.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

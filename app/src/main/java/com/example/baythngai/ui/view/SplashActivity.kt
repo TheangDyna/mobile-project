@@ -1,4 +1,4 @@
-package com.example.baythngai
+package com.example.baythngai.ui.view
 
 import android.content.Intent
 import android.os.Bundle

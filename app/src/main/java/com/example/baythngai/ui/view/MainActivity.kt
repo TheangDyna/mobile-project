@@ -1,13 +1,19 @@
-package com.example.baythngai
+package com.example.baythngai.ui.view
 
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.baythngai.ui.viewmodel.ProductViewModel
+import com.example.baythngai.R
+import com.example.baythngai.ui.adapter.ProductAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,15 +66,34 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchQuery = query
-                productViewModel.fetchProducts(query, reset = true) // Reset search
+                productViewModel.fetchProducts(query, reset = true) // Perform search
+
+                // Close keyboard
+                searchView.clearFocus()
+                hideKeyboard()
+
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return false // Ignore live search for now
+                if (newText.isNullOrEmpty()) { // Detect when search is cleared
+                    searchQuery = null
+                    productViewModel.fetchProducts(reset = true) // Reset product list
+                }
+                return false
             }
         })
 
         return true
+    }
+
+    // Function to hide the keyboard
+    @SuppressLint("ServiceCast")
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }

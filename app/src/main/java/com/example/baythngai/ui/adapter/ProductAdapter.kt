@@ -1,4 +1,4 @@
-package com.example.baythngai
+package com.example.baythngai.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,6 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.baythngai.ui.view.ProductBottomSheet
+import com.example.baythngai.R
+import com.example.baythngai.data.model.Product
 
 class ProductAdapter(private var products: List<Product>, private val onAddToCart: (Product) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() { // Fix: Change Adapter Type

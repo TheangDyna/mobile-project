@@ -1,5 +1,6 @@
-package com.example.baythngai
+package com.example.baythngai.data.network
 
+import com.example.baythngai.data.model.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

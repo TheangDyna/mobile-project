@@ -22,7 +22,7 @@
 
         <!-- Splash Screen Activity -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.view.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>
@@ -33,7 +33,7 @@
 
         <!-- Main Activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyApplication">
 <!--            <intent-filter>-->

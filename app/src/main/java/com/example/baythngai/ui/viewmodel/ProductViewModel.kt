@@ -1,9 +1,11 @@
-package com.example.baythngai
+package com.example.baythngai.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.baythngai.data.model.Product
+import com.example.baythngai.data.repository.ProductRepository
 import kotlinx.coroutines.launch
 
 class ProductViewModel : ViewModel() {
@@ -18,7 +20,7 @@ class ProductViewModel : ViewModel() {
     private var lastPageReached = false
 
     fun fetchProducts(searchQuery: String? = null, reset: Boolean = false) {
-        if (isLoading || lastPageReached) return
+        if (isLoading) return
 
         isLoading = true
         viewModelScope.launch {
@@ -26,7 +28,7 @@ class ProductViewModel : ViewModel() {
                 if (reset) {
                     currentPage = 1
                     lastPageReached = false
-                    _products.value = mutableListOf() // Clear list for new search
+                    _products.value = mutableListOf() // Ensure list is cleared before fetching new data
                 }
 
                 println("Fetching products with query: $searchQuery, page: $currentPage") // Debug Log
@@ -35,9 +37,9 @@ class ProductViewModel : ViewModel() {
                 if (newProducts.isEmpty()) {
                     lastPageReached = true
                 } else {
-                    val updatedList = (_products.value ?: mutableListOf()) + newProducts
-                    _products.value = updatedList.toMutableList()
-                    currentPage++ // Move to next page
+                    val updatedList = if (reset) newProducts else (_products.value ?: mutableListOf()) + newProducts
+                    _products.postValue(updatedList.toMutableList()) // Ensure LiveData updates correctly
+                    currentPage++
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -47,4 +49,5 @@ class ProductViewModel : ViewModel() {
             }
         }
     }
+
 }

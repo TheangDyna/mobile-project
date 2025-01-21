@@ -1,11 +1,4 @@
-package com.example.baythngai
-
-data class ApiResponse(
-    val status: String,
-    val total: Int,
-    val results: Int,
-    val data: List<Product>
-)
+package com.example.baythngai.data.model
 
 data class Product(
     val _id: String,
@@ -23,8 +16,4 @@ data class Product(
     val ratingsAverage: Double,
     val ratingsQuantity: Int,
     val thumbnail: String,
-)
-
-data class Cuisine(
-    val name: String
 )

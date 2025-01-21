@@ -1,4 +1,4 @@
-package com.example.baythngai
+package com.example.baythngai.ui.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.baythngai.R
+import com.example.baythngai.data.model.Product
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ProductBottomSheet(private val product: Product) : BottomSheetDialogFragment() {

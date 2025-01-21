@@ -1,4 +1,7 @@
-package com.example.baythngai
+package com.example.baythngai.data.repository
+
+import com.example.baythngai.data.model.Product
+import com.example.baythngai.data.network.RetrofitInstance
 
 class ProductRepository {
     private val api = RetrofitInstance.api
